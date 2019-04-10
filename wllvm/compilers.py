@@ -133,9 +133,9 @@ def attachBitcodePathToObject(bcPath, outFileName):
 
     # Now write our bitcode section
     if sys.platform.startswith('darwin'):
-        objcopyCmd = ['ld', '-r', '-keep_private_externs', outFileName, '-sectcreate', darwinSegmentName, darwinSectionName, f.name, '-o', outFileName]
+        objcopyCmd = ['aarch64-linux-gnu-ld', '-r', '-keep_private_externs', outFileName, '-sectcreate', darwinSegmentName, darwinSectionName, f.name, '-o', outFileName]
     else:
-        objcopyCmd = ['objcopy', '--add-section', '{0}={1}'.format(elfSectionName, f.name), outFileName]
+        objcopyCmd = ['aarch64-linux-gnu-objcopy', '--add-section', '{0}={1}'.format(elfSectionName, f.name), outFileName]
     orc = 0
 
     # loicg: If the environment variable WLLVM_BC_STORE is set, copy the bitcode
